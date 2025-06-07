@@ -29,9 +29,30 @@
 		F8E5595E2DEB934F00CFF1AB /* pokeexplorerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pokeexplorerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F8576DF62DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				model/Usuario.swift,
+			);
+			target = F8E559532DEB934F00CFF1AB /* pokeexplorerTests */;
+		};
+		F8576DF72DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				model/Usuario.swift,
+			);
+			target = F8E5595D2DEB934F00CFF1AB /* pokeexplorerUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F8E559432DEB934D00CFF1AB /* pokeexplorer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F8576DF62DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerTests" target */,
+				F8576DF72DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerUITests" target */,
+			);
 			path = pokeexplorer;
 			sourceTree = "<group>";
 		};

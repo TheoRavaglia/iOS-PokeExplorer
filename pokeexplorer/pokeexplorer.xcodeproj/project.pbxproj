@@ -33,6 +33,7 @@
 		F8576DF62DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				model/Pokemon.swift,
 				model/Usuario.swift,
 			);
 			target = F8E559532DEB934F00CFF1AB /* pokeexplorerTests */;
@@ -40,6 +41,7 @@
 		F8576DF72DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				model/Pokemon.swift,
 				model/Usuario.swift,
 			);
 			target = F8E5595D2DEB934F00CFF1AB /* pokeexplorerUITests */;

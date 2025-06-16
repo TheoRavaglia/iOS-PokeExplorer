@@ -9,7 +9,7 @@ struct PokéExplorerApp: App {
         WindowGroup {
             Group {
                 if appState.isLoading {
-                    LoadingView()
+                    LoadingView()	
                 } else if appState.isLoggedIn {
                     PokemonListView()
                 } else {

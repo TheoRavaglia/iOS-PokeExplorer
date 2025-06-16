@@ -78,4 +78,45 @@ final class APIService {
             throw APIError.invalidURL
         }
         
-        urlComponents.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0
+        urlComponents.queryItems = parameters.map { URLQueryItem(name: $0.key, value: $0.value) }
+        
+        guard let url = urlComponents.url else {
+            throw APIError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET" // Assuming paginated requests are GET
+        
+        do {
+            let (data, response) = try await session.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw APIError.invalidResponse
+            }
+            
+            guard (200...299).contains(httpResponse.statusCode) else {
+                throw APIError.statusCode(httpResponse.statusCode)
+            }
+            
+            do {
+                // You'll need to define how your paginated response looks.
+                // Assuming the response directly decodes into an array of T
+                // and you'll need to parse 'nextOffset' from the response headers or body
+                // For now, let's assume the response is just an array of T.
+                let results = try decoder.decode([T].self, from: data)
+                
+                // This part needs to be adapted to your API's pagination strategy.
+                // How does your API indicate the next offset?
+                // For example, it might be in a 'next' link in the response body,
+                // or a 'X-Next-Offset' header.
+                let nextOffset: Int? = nil // Placeholder
+                
+                return (results, nextOffset)
+            } catch {
+                throw APIError.decodingError(error)
+            }
+        } catch {
+            throw APIError.networkError(error)
+        }
+    }
+}

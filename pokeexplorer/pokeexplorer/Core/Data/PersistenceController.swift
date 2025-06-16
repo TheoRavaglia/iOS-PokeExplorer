@@ -34,9 +34,9 @@ class PersistenceController {
     func criarUsuario(nome: String, email: String, senha: String, completion: @escaping (Bool, CDUser?) -> Void) {
         let newUser = CDUser(context: context)
         newUser.id = UUID()
-        newUser.nome = nome
+        newUser.name = nome
         newUser.email = email
-        newUser.senha = senha
+        newUser.password = senha
         
         do {
             try context.save()
@@ -95,9 +95,9 @@ class PersistenceController {
                 context.delete(existingFavorite)
             } else {
                 let newFavorite = CDFavorite(context: context)
-                newFavorite.usuario = user
+                newFavorite.user = user
                 newFavorite.pokemonId = Int32(pokemon.id)
-                newFavorite.dataAdicao = Date()
+                newFavorite.dateAdded = Date()
             }
             
             saveContext()

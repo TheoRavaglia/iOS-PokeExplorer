@@ -1,6 +1,7 @@
 import CoreData
+import Combine
 
-class DataStore {
+class DataStore: ObservableObject {
     static let shared = DataStore()
     
     private lazy var persistentContainer: NSPersistentContainer = {

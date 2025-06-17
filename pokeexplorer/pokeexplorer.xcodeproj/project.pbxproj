@@ -7,85 +7,62 @@
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
-		F8E559552DEB934F00CFF1AB /* PBXContainerItemProxy */ = {
+		F86CCB902E00E937008E0EEA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F8E559392DEB934D00CFF1AB /* Project object */;
+			containerPortal = F86CCB742E00E936008E0EEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F8E559402DEB934D00CFF1AB;
+			remoteGlobalIDString = F86CCB7B2E00E936008E0EEA;
 			remoteInfo = pokeexplorer;
 		};
-		F8E5595F2DEB934F00CFF1AB /* PBXContainerItemProxy */ = {
+		F86CCB9A2E00E937008E0EEA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F8E559392DEB934D00CFF1AB /* Project object */;
+			containerPortal = F86CCB742E00E936008E0EEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = F8E559402DEB934D00CFF1AB;
+			remoteGlobalIDString = F86CCB7B2E00E936008E0EEA;
 			remoteInfo = pokeexplorer;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F8E559412DEB934D00CFF1AB /* pokeexplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pokeexplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8E559542DEB934F00CFF1AB /* pokeexplorerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pokeexplorerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8E5595E2DEB934F00CFF1AB /* pokeexplorerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pokeexplorerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F86CCB7C2E00E936008E0EEA /* pokeexplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pokeexplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F86CCB8F2E00E937008E0EEA /* pokeexplorerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pokeexplorerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F86CCB992E00E937008E0EEA /* pokeexplorerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pokeexplorerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		F8576DF62DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				model/Pokemon.swift,
-				model/Usuario.swift,
-			);
-			target = F8E559532DEB934F00CFF1AB /* pokeexplorerTests */;
-		};
-		F8576DF72DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerUITests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				model/Pokemon.swift,
-				model/Usuario.swift,
-			);
-			target = F8E5595D2DEB934F00CFF1AB /* pokeexplorerUITests */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F8E559432DEB934D00CFF1AB /* pokeexplorer */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				F8576DF62DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerTests" target */,
-				F8576DF72DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerUITests" target */,
-			);
-			path = pokeexplorer;
-			sourceTree = "<group>";
-		};
-		F8E559572DEB934F00CFF1AB /* pokeexplorerTests */ = {
+		F86CCB922E00E937008E0EEA /* pokeexplorerTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = pokeexplorerTests;
 			sourceTree = "<group>";
 		};
-		F8E559612DEB934F00CFF1AB /* pokeexplorerUITests */ = {
+		F86CCB9C2E00E937008E0EEA /* pokeexplorerUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = pokeexplorerUITests;
+			sourceTree = "<group>";
+		};
+		F86CCBB12E00E9CC008E0EEA /* pokeexplorer */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = pokeexplorer;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F8E5593E2DEB934D00CFF1AB /* Frameworks */ = {
+		F86CCB792E00E936008E0EEA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8E559512DEB934F00CFF1AB /* Frameworks */ = {
+		F86CCB8C2E00E937008E0EEA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8E5595B2DEB934F00CFF1AB /* Frameworks */ = {
+		F86CCB962E00E937008E0EEA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -95,22 +72,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F8E559382DEB934D00CFF1AB = {
+		F86CCB732E00E936008E0EEA = {
 			isa = PBXGroup;
 			children = (
-				F8E559432DEB934D00CFF1AB /* pokeexplorer */,
-				F8E559572DEB934F00CFF1AB /* pokeexplorerTests */,
-				F8E559612DEB934F00CFF1AB /* pokeexplorerUITests */,
-				F8E559422DEB934D00CFF1AB /* Products */,
+				F86CCBB12E00E9CC008E0EEA /* pokeexplorer */,
+				F86CCB922E00E937008E0EEA /* pokeexplorerTests */,
+				F86CCB9C2E00E937008E0EEA /* pokeexplorerUITests */,
+				F86CCB7D2E00E936008E0EEA /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		F8E559422DEB934D00CFF1AB /* Products */ = {
+		F86CCB7D2E00E936008E0EEA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F8E559412DEB934D00CFF1AB /* pokeexplorer.app */,
-				F8E559542DEB934F00CFF1AB /* pokeexplorerTests.xctest */,
-				F8E5595E2DEB934F00CFF1AB /* pokeexplorerUITests.xctest */,
+				F86CCB7C2E00E936008E0EEA /* pokeexplorer.app */,
+				F86CCB8F2E00E937008E0EEA /* pokeexplorerTests.xctest */,
+				F86CCB992E00E937008E0EEA /* pokeexplorerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,134 +95,132 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F8E559402DEB934D00CFF1AB /* pokeexplorer */ = {
+		F86CCB7B2E00E936008E0EEA /* pokeexplorer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F8E559682DEB934F00CFF1AB /* Build configuration list for PBXNativeTarget "pokeexplorer" */;
+			buildConfigurationList = F86CCBA32E00E937008E0EEA /* Build configuration list for PBXNativeTarget "pokeexplorer" */;
 			buildPhases = (
-				F8E5593D2DEB934D00CFF1AB /* Sources */,
-				F8E5593E2DEB934D00CFF1AB /* Frameworks */,
-				F8E5593F2DEB934D00CFF1AB /* Resources */,
+				F86CCB782E00E936008E0EEA /* Sources */,
+				F86CCB792E00E936008E0EEA /* Frameworks */,
+				F86CCB7A2E00E936008E0EEA /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				F8E559432DEB934D00CFF1AB /* pokeexplorer */,
 			);
 			name = pokeexplorer;
 			packageProductDependencies = (
 			);
 			productName = pokeexplorer;
-			productReference = F8E559412DEB934D00CFF1AB /* pokeexplorer.app */;
+			productReference = F86CCB7C2E00E936008E0EEA /* pokeexplorer.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F8E559532DEB934F00CFF1AB /* pokeexplorerTests */ = {
+		F86CCB8E2E00E937008E0EEA /* pokeexplorerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F8E5596B2DEB934F00CFF1AB /* Build configuration list for PBXNativeTarget "pokeexplorerTests" */;
+			buildConfigurationList = F86CCBA62E00E937008E0EEA /* Build configuration list for PBXNativeTarget "pokeexplorerTests" */;
 			buildPhases = (
-				F8E559502DEB934F00CFF1AB /* Sources */,
-				F8E559512DEB934F00CFF1AB /* Frameworks */,
-				F8E559522DEB934F00CFF1AB /* Resources */,
+				F86CCB8B2E00E937008E0EEA /* Sources */,
+				F86CCB8C2E00E937008E0EEA /* Frameworks */,
+				F86CCB8D2E00E937008E0EEA /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F8E559562DEB934F00CFF1AB /* PBXTargetDependency */,
+				F86CCB912E00E937008E0EEA /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				F8E559572DEB934F00CFF1AB /* pokeexplorerTests */,
+				F86CCB922E00E937008E0EEA /* pokeexplorerTests */,
+				F86CCBB12E00E9CC008E0EEA /* pokeexplorer */,
 			);
 			name = pokeexplorerTests;
 			packageProductDependencies = (
 			);
 			productName = pokeexplorerTests;
-			productReference = F8E559542DEB934F00CFF1AB /* pokeexplorerTests.xctest */;
+			productReference = F86CCB8F2E00E937008E0EEA /* pokeexplorerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F8E5595D2DEB934F00CFF1AB /* pokeexplorerUITests */ = {
+		F86CCB982E00E937008E0EEA /* pokeexplorerUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F8E5596E2DEB934F00CFF1AB /* Build configuration list for PBXNativeTarget "pokeexplorerUITests" */;
+			buildConfigurationList = F86CCBA92E00E937008E0EEA /* Build configuration list for PBXNativeTarget "pokeexplorerUITests" */;
 			buildPhases = (
-				F8E5595A2DEB934F00CFF1AB /* Sources */,
-				F8E5595B2DEB934F00CFF1AB /* Frameworks */,
-				F8E5595C2DEB934F00CFF1AB /* Resources */,
+				F86CCB952E00E937008E0EEA /* Sources */,
+				F86CCB962E00E937008E0EEA /* Frameworks */,
+				F86CCB972E00E937008E0EEA /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F8E559602DEB934F00CFF1AB /* PBXTargetDependency */,
+				F86CCB9B2E00E937008E0EEA /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				F8E559612DEB934F00CFF1AB /* pokeexplorerUITests */,
+				F86CCB9C2E00E937008E0EEA /* pokeexplorerUITests */,
 			);
 			name = pokeexplorerUITests;
 			packageProductDependencies = (
 			);
 			productName = pokeexplorerUITests;
-			productReference = F8E5595E2DEB934F00CFF1AB /* pokeexplorerUITests.xctest */;
+			productReference = F86CCB992E00E937008E0EEA /* pokeexplorerUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F8E559392DEB934D00CFF1AB /* Project object */ = {
+		F86CCB742E00E936008E0EEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
-					F8E559402DEB934D00CFF1AB = {
+					F86CCB7B2E00E936008E0EEA = {
 						CreatedOnToolsVersion = 16.2;
 					};
-					F8E559532DEB934F00CFF1AB = {
+					F86CCB8E2E00E937008E0EEA = {
 						CreatedOnToolsVersion = 16.2;
-						TestTargetID = F8E559402DEB934D00CFF1AB;
+						TestTargetID = F86CCB7B2E00E936008E0EEA;
 					};
-					F8E5595D2DEB934F00CFF1AB = {
+					F86CCB982E00E937008E0EEA = {
 						CreatedOnToolsVersion = 16.2;
-						TestTargetID = F8E559402DEB934D00CFF1AB;
+						TestTargetID = F86CCB7B2E00E936008E0EEA;
 					};
 				};
 			};
-			buildConfigurationList = F8E5593C2DEB934D00CFF1AB /* Build configuration list for PBXProject "pokeexplorer" */;
+			buildConfigurationList = F86CCB772E00E936008E0EEA /* Build configuration list for PBXProject "pokeexplorer" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = F8E559382DEB934D00CFF1AB;
+			mainGroup = F86CCB732E00E936008E0EEA;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = F8E559422DEB934D00CFF1AB /* Products */;
+			productRefGroup = F86CCB7D2E00E936008E0EEA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F8E559402DEB934D00CFF1AB /* pokeexplorer */,
-				F8E559532DEB934F00CFF1AB /* pokeexplorerTests */,
-				F8E5595D2DEB934F00CFF1AB /* pokeexplorerUITests */,
+				F86CCB7B2E00E936008E0EEA /* pokeexplorer */,
+				F86CCB8E2E00E937008E0EEA /* pokeexplorerTests */,
+				F86CCB982E00E937008E0EEA /* pokeexplorerUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F8E5593F2DEB934D00CFF1AB /* Resources */ = {
+		F86CCB7A2E00E936008E0EEA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8E559522DEB934F00CFF1AB /* Resources */ = {
+		F86CCB8D2E00E937008E0EEA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8E5595C2DEB934F00CFF1AB /* Resources */ = {
+		F86CCB972E00E937008E0EEA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -255,21 +230,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F8E5593D2DEB934D00CFF1AB /* Sources */ = {
+		F86CCB782E00E936008E0EEA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8E559502DEB934F00CFF1AB /* Sources */ = {
+		F86CCB8B2E00E937008E0EEA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8E5595A2DEB934F00CFF1AB /* Sources */ = {
+		F86CCB952E00E937008E0EEA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -279,20 +254,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F8E559562DEB934F00CFF1AB /* PBXTargetDependency */ = {
+		F86CCB912E00E937008E0EEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F8E559402DEB934D00CFF1AB /* pokeexplorer */;
-			targetProxy = F8E559552DEB934F00CFF1AB /* PBXContainerItemProxy */;
+			target = F86CCB7B2E00E936008E0EEA /* pokeexplorer */;
+			targetProxy = F86CCB902E00E937008E0EEA /* PBXContainerItemProxy */;
 		};
-		F8E559602DEB934F00CFF1AB /* PBXTargetDependency */ = {
+		F86CCB9B2E00E937008E0EEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F8E559402DEB934D00CFF1AB /* pokeexplorer */;
-			targetProxy = F8E5595F2DEB934F00CFF1AB /* PBXContainerItemProxy */;
+			target = F86CCB7B2E00E936008E0EEA /* pokeexplorer */;
+			targetProxy = F86CCB9A2E00E937008E0EEA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		F8E559662DEB934F00CFF1AB /* Debug */ = {
+		F86CCBA12E00E937008E0EEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -353,7 +328,7 @@
 			};
 			name = Debug;
 		};
-		F8E559672DEB934F00CFF1AB /* Release */ = {
+		F86CCBA22E00E937008E0EEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -406,7 +381,7 @@
 			};
 			name = Release;
 		};
-		F8E559692DEB934F00CFF1AB /* Debug */ = {
+		F86CCBA42E00E937008E0EEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -443,7 +418,7 @@
 			};
 			name = Debug;
 		};
-		F8E5596A2DEB934F00CFF1AB /* Release */ = {
+		F86CCBA52E00E937008E0EEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -480,7 +455,7 @@
 			};
 			name = Release;
 		};
-		F8E5596C2DEB934F00CFF1AB /* Debug */ = {
+		F86CCBA72E00E937008E0EEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -502,7 +477,7 @@
 			};
 			name = Debug;
 		};
-		F8E5596D2DEB934F00CFF1AB /* Release */ = {
+		F86CCBA82E00E937008E0EEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -524,7 +499,7 @@
 			};
 			name = Release;
 		};
-		F8E5596F2DEB934F00CFF1AB /* Debug */ = {
+		F86CCBAA2E00E937008E0EEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -545,7 +520,7 @@
 			};
 			name = Debug;
 		};
-		F8E559702DEB934F00CFF1AB /* Release */ = {
+		F86CCBAB2E00E937008E0EEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -569,43 +544,43 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F8E5593C2DEB934D00CFF1AB /* Build configuration list for PBXProject "pokeexplorer" */ = {
+		F86CCB772E00E936008E0EEA /* Build configuration list for PBXProject "pokeexplorer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F8E559662DEB934F00CFF1AB /* Debug */,
-				F8E559672DEB934F00CFF1AB /* Release */,
+				F86CCBA12E00E937008E0EEA /* Debug */,
+				F86CCBA22E00E937008E0EEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F8E559682DEB934F00CFF1AB /* Build configuration list for PBXNativeTarget "pokeexplorer" */ = {
+		F86CCBA32E00E937008E0EEA /* Build configuration list for PBXNativeTarget "pokeexplorer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F8E559692DEB934F00CFF1AB /* Debug */,
-				F8E5596A2DEB934F00CFF1AB /* Release */,
+				F86CCBA42E00E937008E0EEA /* Debug */,
+				F86CCBA52E00E937008E0EEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F8E5596B2DEB934F00CFF1AB /* Build configuration list for PBXNativeTarget "pokeexplorerTests" */ = {
+		F86CCBA62E00E937008E0EEA /* Build configuration list for PBXNativeTarget "pokeexplorerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F8E5596C2DEB934F00CFF1AB /* Debug */,
-				F8E5596D2DEB934F00CFF1AB /* Release */,
+				F86CCBA72E00E937008E0EEA /* Debug */,
+				F86CCBA82E00E937008E0EEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F8E5596E2DEB934F00CFF1AB /* Build configuration list for PBXNativeTarget "pokeexplorerUITests" */ = {
+		F86CCBA92E00E937008E0EEA /* Build configuration list for PBXNativeTarget "pokeexplorerUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F8E5596F2DEB934F00CFF1AB /* Debug */,
-				F8E559702DEB934F00CFF1AB /* Release */,
+				F86CCBAA2E00E937008E0EEA /* Debug */,
+				F86CCBAB2E00E937008E0EEA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F8E559392DEB934D00CFF1AB /* Project object */;
+	rootObject = F86CCB742E00E936008E0EEA /* Project object */;
 }

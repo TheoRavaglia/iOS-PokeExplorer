@@ -1,0 +1,9 @@
+//
+//  PokemonDetailViewModel.swift
+//  pokeexplorer
+//
+//  Created by user276504 on 6/16/25.
+//
+
+
+import Foundation@MainActorfinal class PokemonDetailViewModel: ObservableObject {    @Published var pokemonDetails: APIPokemonDetail?    @Published var isFavorite = false        let pokemonName: String    private var coordinator: AppCoordinator        init(pokemonName: String, coordinator: AppCoordinator) {        self.pokemonName = pokemonName        self.coordinator = coordinator        Task { await onInit() }    }        private func onInit() async {        await fetchDetails()        await checkFavoriteStatus()    }        private func fetchDetails() async {        do { self.pokemonDetails = try await PokemonAPIService().fetchPokemonDetails(name: pokemonName) }        catch {}    }        func toggleFavorite() {        guard let details = pokemonDetails, let service = coordinator.persistenceService, let user = coordinator.currentUser else { return }        isFavorite.toggle()        Task {            do {                if isFavorite { try await service.addFavorite(pokemonID: details.id, name: details.name, imageURL: details.sprites.frontDefault, forUser: user) }                else { try await service.removeFavorite(withID: details.id, forUser: user) }            } catch { isFavorite.toggle() }        }    }        private func checkFavoriteStatus() async {        guard let details = pokemonDetails, let service = coordinator.persistenceService, let user = coordinator.currentUser else { return }        self.isFavorite = await service.isPokemonFavorite(withID: details.id, forUser: user)    }}

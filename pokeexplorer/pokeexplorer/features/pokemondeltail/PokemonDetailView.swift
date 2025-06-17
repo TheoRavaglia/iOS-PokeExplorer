@@ -1,0 +1,9 @@
+//
+//  PokemonDetailView.swift
+//  pokeexplorer
+//
+//  Created by user276504 on 6/16/25.
+//
+
+
+import SwiftUIstruct PokemonDetailView: View {    @StateObject private var viewModel: PokemonDetailViewModel    init(pokemonName: String, coordinator: AppCoordinator) {        _viewModel = StateObject(wrappedValue: PokemonDetailViewModel(pokemonName: pokemonName, coordinator: coordinator))    }    var body: some View {        ScrollView {            if let details = viewModel.pokemonDetails {                VStack(spacing: DesignTokens.Spacing.medium) {                    AsyncImage(url: URL(string: details.sprites.frontDefault)) {                        $0.resizable().scaledToFit().frame(height: 200)                    } placeholder: { ProgressView() }                                        Text("Peso: \(details.weight) | Altura: \(details.height)")                        .font(.subheadline)                        .foregroundColor(.secondary)                }                .padding()            }        }        .navigationTitle(viewModel.pokemonName.capitalized)        .toolbar {            ToolbarItem(placement: .navigationBarTrailing) {                Button(action: viewModel.toggleFavorite) {                    Image(systemName: viewModel.isFavorite ? "star.fill" : "star")                        .foregroundColor(viewModel.isFavorite ? .yellow : .gray)                        .font(.title2)                        .scaleEffect(viewModel.isFavorite ? 1.2 : 1.0)                        .animation(.spring(response: 0.3, dampingFraction: 0.5), value: viewModel.isFavorite)                }            }        }    }}

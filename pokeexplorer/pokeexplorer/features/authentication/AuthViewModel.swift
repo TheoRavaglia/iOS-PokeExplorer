@@ -1,0 +1,9 @@
+//
+//  AuthViewModel.swift
+//  pokeexplorer
+//
+//  Created by user276504 on 6/16/25.
+//
+
+
+import Foundation@MainActorfinal class AuthViewModel: ObservableObject {    enum AuthMode { case login, register }    @Published var authMode: AuthMode = .login    @Published var username = ""    @Published var email = ""    @Published var password = ""    @Published var errorMessage: String?    @Published var isLoading = false    var coordinator: AppCoordinator        init(coordinator: AppCoordinator) {        self.coordinator = coordinator    }        func submit() {        guard let service = coordinator.persistenceService else { return }        isLoading = true        errorMessage = nil                Task {            do {                if authMode == .login { try await login(service: service) }                else { try await register(service: service) }            } catch {                errorMessage = error.localizedDescription            }            isLoading = false        }    }        private func login(service: PersistenceService) async throws {        guard let user = try await service.fetchUser(withEmail: email), user.passwordHash == password else {            throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Email ou senha inválidos."])        }        coordinator.login(email: user.email)    }        private func register(service: PersistenceService) async throws {        guard !username.isEmpty, !email.isEmpty, !password.isEmpty else {            throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Todos os campos são obrigatórios."])        }        try await service.createUser(username: username, email: email, passwordHash: password)        coordinator.login(email: email)    }}

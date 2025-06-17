@@ -1,36 +1,9 @@
-import SwiftUI
+//
+//  PokemonListView.swift
+//  pokeexplorer
+//
+//  Created by user276504 on 6/16/25.
+//
 
-struct PokemonListView: View {
-    @StateObject private var viewModel = PokemonListViewModel()
-    
-    var body: some View {
-        NavigationView {
-            List(viewModel.pokemonList) { pokemon in
-                NavigationLink(destination: Text("Detalhes de \(pokemon.name)")) {
-                    Text(pokemon.name.capitalized)
-                }
-            }
-            .navigationTitle("Pokédex")
-            .onAppear {
-                viewModel.fetchPokemonList()
-            }
-        }
-    }
-}
 
-class PokemonListViewModel: ObservableObject {
-    @Published var pokemonList: [PokemonListItem] = []
-    
-    func fetchPokemonList() {
-        PokeAPIService.shared.fetchPokemonList { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let list):
-                    self.pokemonList = list
-                case .failure(let error):
-                    print("Erro ao buscar Pokémon: \(error)")
-                }
-            }
-        }
-    }
-}
+import SwiftUIstruct PokemonListView: View {    @StateObject private var viewModel = PokemonListViewModel()    @ObservedObject var coordinator: AppCoordinator    private let columns = [GridItem(.adaptive(minimum: 110))]    var body: some View {        NavigationStack(path: $coordinator.path) {            ScrollView {                LazyVGrid(columns: columns, spacing: DesignTokens.Spacing.medium) {                    ForEach(viewModel.pokemons) { pokemon in                        NavigationLink(value: pokemon) { PokemonCellView(pokemon: pokemon) }                    }                }                .padding()                                if viewModel.isLoading { ProgressView() }                 else { Color.clear.onAppear(perform: viewModel.loadMorePokemons) }            }            .navigationTitle("Pokédex")            .navigationDestination(for: APIPokemonListItem.self) { pokemon in                PokemonDetailView(pokemonName: pokemon.name, coordinator: coordinator)            }        }    }}struct PokemonCellView: View {    let pokemon: APIPokemonListItem    private var pokemonID: String { pokemon.url.split(separator: "/").last?.description ?? "1" }    var body: some View {        VStack {            AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(pokemonID).png")) {                $0.resizable().scaledToFit()            } placeholder: { ProgressView() }            .frame(width: 80, height: 80)                        Text(pokemon.name.capitalized).font(DesignTokens.Fonts.caption())        }        .padding(DesignTokens.Spacing.small)        .background(DesignTokens.Colors.background)        .cornerRadius(DesignTokens.CornerRadius.standard)    }}

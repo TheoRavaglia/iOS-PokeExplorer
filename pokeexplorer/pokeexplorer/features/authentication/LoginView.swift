@@ -1,0 +1,9 @@
+//
+//  LoginView.swift
+//  pokeexplorer
+//
+//  Created by user276504 on 6/16/25.
+//
+
+
+import SwiftUIstruct LoginView: View {    @StateObject var viewModel: AuthViewModel        var body: some View {        VStack(spacing: DesignTokens.Spacing.medium) {            Text("PokéExplorer")                .font(DesignTokens.Fonts.title())                .foregroundColor(DesignTokens.Colors.primary)            Picker("Mode", selection: $viewModel.authMode) {                Text("Login").tag(AuthViewModel.AuthMode.login)                Text("Cadastro").tag(AuthViewModel.AuthMode.register)            }            .pickerStyle(.segmented)            if viewModel.authMode == .register {                TextField("Nome", text: $viewModel.username)                    .textContentType(.username)            }                        TextField("Email", text: $viewModel.email)                .keyboardType(.emailAddress)                .autocapitalization(.none)            SecureField("Senha", text: $viewModel.password)                .textContentType(.password)            if let errorMessage = viewModel.errorMessage {                Text(errorMessage)                    .foregroundColor(.red)                    .font(.caption)            }            Button(action: viewModel.submit) {                Text(viewModel.authMode == .login ? "Entrar" : "Criar Conta")                    .frame(maxWidth: .infinity)            }            .buttonStyle(.borderedProminent)            .tint(DesignTokens.Colors.primary)            .disabled(viewModel.isLoading)        }        .textFieldStyle(.roundedBorder)        .padding()    }}

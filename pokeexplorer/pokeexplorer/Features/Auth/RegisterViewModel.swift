@@ -1,1 +1,0 @@
-class RegisterViewModel: ObservableObject {    // ... propriedades existentes ...    private let persistence = PersistenceController.shared        func registrar() -> Bool {        // ... validações anteriores ...                return persistence.registrarUsuario(            nome: nome,            email: email,            senha: senha        )    }}

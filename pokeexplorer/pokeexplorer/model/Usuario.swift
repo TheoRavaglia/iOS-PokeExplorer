@@ -3,7 +3,7 @@ import CoreData
 @objc(Usuario)
 public class Usuario: NSManagedObject {
     @NSManaged public var id: UUID?
-    @NSManaged public var nomeDeUsuario: String?
+    @NSManaged public var nome: String?
     @NSManaged public var email: String?
     @NSManaged public var senha: String?
 }

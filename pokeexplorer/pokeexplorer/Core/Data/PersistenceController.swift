@@ -34,9 +34,9 @@ class PersistenceController {
     func criarUsuario(nome: String, email: String, senha: String, completion: @escaping (Bool, CDUser?) -> Void) {
         let newUser = CDUser(context: context)
         newUser.id = UUID()
-        newUser.name = nome
+        newUser.nome = nome
         newUser.email = email
-        newUser.password = senha
+        newUser.senha = senha
         
         do {
             try context.save()
@@ -47,9 +47,9 @@ class PersistenceController {
         }
     }
     
-    func autenticarUsuario(email: String, senha: String, completion: @escaping (Bool, CDUser?) -> Void) {
+    func registrarUsuario(nome: String,email: String, senha: String, completion: @escaping (Bool, CDUser?) -> Void) {
         let request: NSFetchRequest<CDUser> = CDUser.fetchRequest()
-        request.predicate = NSPredicate(format: "email == %@ AND senha == %@", email, senha)
+        request.predicate = NSPredicate(format: "email == %@ AND senha == %@ AND nome= %@", email, senha,nome)
         
         do {
             let users = try context.fetch(request)

@@ -3,10 +3,10 @@ import CoreData
 @objc(CDUser)
 public class CDUser: NSManagedObject, Identifiable {
     @NSManaged public var id: UUID?
-    @NSManaged public var name: String?
+    @NSManaged public var nome: String?
     @NSManaged public var email: String?
-    @NSManaged public var password: String?
-    @NSManaged public var favorites: Set<CDFavorite>?
+    @NSManaged public var senha: String?
+    @NSManaged public var favoritos: Set<CDFavorite>?
 }
 
 extension CDUser {
@@ -19,9 +19,9 @@ extension CDUser {
     static func mock() -> CDUser {
         let user = CDUser(context: DataStore.shared.context)
         user.id = UUID()
-        user.name = "Ash Ketchum"
+        user.nome = "Ash Ketchum"
         user.email = "ash@pokemon.com"
-        user.password = "pikachu123"
+        user.senha = "pikachu123"
         return user
     }
 }

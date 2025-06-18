@@ -34,7 +34,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				model/Pokemon.swift,
-				model/Usuario.swift,
 			);
 			target = F8E559532DEB934F00CFF1AB /* pokeexplorerTests */;
 		};
@@ -42,7 +41,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				model/Pokemon.swift,
-				model/Usuario.swift,
 			);
 			target = F8E5595D2DEB934F00CFF1AB /* pokeexplorerUITests */;
 		};
@@ -56,16 +54,6 @@
 				F8576DF72DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerUITests" target */,
 			);
 			path = pokeexplorer;
-			sourceTree = "<group>";
-		};
-		F8E559572DEB934F00CFF1AB /* pokeexplorerTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = pokeexplorerTests;
-			sourceTree = "<group>";
-		};
-		F8E559612DEB934F00CFF1AB /* pokeexplorerUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = pokeexplorerUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -99,8 +87,6 @@
 			isa = PBXGroup;
 			children = (
 				F8E559432DEB934D00CFF1AB /* pokeexplorer */,
-				F8E559572DEB934F00CFF1AB /* pokeexplorerTests */,
-				F8E559612DEB934F00CFF1AB /* pokeexplorerUITests */,
 				F8E559422DEB934D00CFF1AB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -153,9 +139,6 @@
 			dependencies = (
 				F8E559562DEB934F00CFF1AB /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				F8E559572DEB934F00CFF1AB /* pokeexplorerTests */,
-			);
 			name = pokeexplorerTests;
 			packageProductDependencies = (
 			);
@@ -175,9 +158,6 @@
 			);
 			dependencies = (
 				F8E559602DEB934F00CFF1AB /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				F8E559612DEB934F00CFF1AB /* pokeexplorerUITests */,
 			);
 			name = pokeexplorerUITests;
 			packageProductDependencies = (

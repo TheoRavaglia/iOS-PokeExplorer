@@ -3,8 +3,8 @@ import SwiftUI
 enum DesignSystem {
     // MARK: - Colors
     enum Colors {
-        static let primary = Color(hex: "#EF5350") // Vermelho Pokémon
-        static let secondary = Color(hex: "#42A5F5") // Azul Pokémon
+        static let primary = Color(hex: "#EF5350")
+        static let secondary = Color(hex: "#42A5F5")
         static let background = Color(hex: "#F5F5F5")
         static let cardBackground = Color.white
         static let textPrimary = Color(hex: "#212121")
@@ -59,13 +59,13 @@ enum DesignSystem {
     
     // MARK: - Fonts
     enum Fonts {
-        static let largeTitle = Font.system(size: 34, weight: .bold)
-        static let title = Font.system(size: 28, weight: .bold)
-        static let title2 = Font.system(size: 22, weight: .bold)
-        static let headline = Font.system(size: 18, weight: .semibold)
-        static let body = Font.system(size: 16, weight: .regular)
-        static let callout = Font.system(size: 14, weight: .regular)
-        static let caption = Font.system(size: 12, weight: .medium)
+        static let largeTitle = Font.largeTitle.bold()
+        static let title = Font.title.bold()
+        static let title2 = Font.title2.bold()
+        static let headline = Font.headline
+        static let body = Font.body
+        static let callout = Font.callout
+        static let caption = Font.caption
         
         static func customFont(size: CGFloat, weight: Font.Weight) -> Font {
             Font.system(size: size, weight: weight)
@@ -94,9 +94,9 @@ enum DesignSystem {
     
     // MARK: - Shadows
     enum Shadows {
-        static let small = Shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 1)
-        static let medium = Shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
-        static let large = Shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+        static let small = (color: Color.black.opacity(0.1), radius: 2.0, x: 0.0, y: 1.0)
+        static let medium = (color: Color.black.opacity(0.2), radius: 4.0, x: 0.0, y: 2.0)
+        static let large = (color: Color.black.opacity(0.3), radius: 8.0, x: 0.0, y: 4.0)
     }
     
     // MARK: - Icons
@@ -123,45 +123,99 @@ enum DesignSystem {
             Animation.easeInOut(duration: duration).repeatForever(autoreverses: true)
         }
     }
-}
-
-// MARK: - Extensões de Suporte
-extension Color {
-    init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int: UInt64 = 0
-        Scanner(string: hex).scanHexInt64(&int)
-        let a, r, g, b: UInt64
-        switch hex.count {
-        case 3: // RGB (12-bit)
-            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-        case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
-        case 8: // ARGB (32-bit)
-            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
-        default:
-            (a, r, g, b) = (1, 1, 1, 0)
-        }
-        
-        self.init(
-            .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue:  Double(b) / 255,
-            opacity: Double(a) / 255
+    
+    // MARK: - Gradients
+    enum Gradients {
+        static let primary = LinearGradient(
+            gradient: Gradient(colors: [Colors.primary, Colors.secondary]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
         )
+        
+        static func typeGradient(_ type: String) -> LinearGradient {
+            let baseColor = Colors.typeColor(type)
+            return LinearGradient(
+                gradient: Gradient(colors: [baseColor, baseColor.opacity(0.7)]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        }
     }
 }
 
+// MARK: - Extensão de Color para suporte a Hex
+extension Color {
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet(charactersIn: "#"))
+        var rgbValue: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&rgbValue)
+        
+        let red = Double((rgbValue & 0xFF0000) >> 16) / 255.0
+        let green = Double((rgbValue & 0x00FF00) >> 8) / 255.0
+        let blue = Double(rgbValue & 0x0000FF) / 255.0
+        
+        self.init(red: red, green: green, blue: blue)
+    }
+}
+
+// MARK: - Modificadores de View
 extension View {
-    func applyCardStyle() -> some View {
+    func applyCardStyle(cornerRadius: CGFloat = DesignSystem.CornerRadius.large) -> some View {
         self
             .background(DesignSystem.Colors.cardBackground)
-            .cornerRadius(DesignSystem.CornerRadius.large)
+            .cornerRadius(cornerRadius)
             .shadow(color: DesignSystem.Colors.textSecondary.opacity(0.1), radius: 6, x: 0, y: 2)
     }
     
     func typeBackground(_ type: String) -> some View {
         self.background(DesignSystem.Colors.typeColor(type).opacity(0.2))
+    }
+    
+    func pokemonCardStyle(type: String) -> some View {
+        self
+            .padding(DesignSystem.Spacing.m)
+            .background(DesignSystem.Gradients.typeGradient(type))
+            .cornerRadius(DesignSystem.CornerRadius.large)
+            .shadow(color: DesignSystem.Colors.typeColor(type).opacity(0.4), radius: 8, x: 0, y: 4)
+    }
+    
+    func sectionHeader() -> some View {
+        self
+            .font(DesignSystem.Fonts.title2)
+            .foregroundColor(DesignSystem.Colors.primary)
+            .padding(.vertical, DesignSystem.Spacing.s)
+    }
+    
+    // Modificadores para sombras
+    func shadowSmall() -> some View {
+        self.shadow(
+            color: DesignSystem.Shadows.small.color,
+            radius: DesignSystem.Shadows.small.radius,
+            x: DesignSystem.Shadows.small.x,
+            y: DesignSystem.Shadows.small.y
+        )
+    }
+    
+    func shadowMedium() -> some View {
+        self.shadow(
+            color: DesignSystem.Shadows.medium.color,
+            radius: DesignSystem.Shadows.medium.radius,
+            x: DesignSystem.Shadows.medium.x,
+            y: DesignSystem.Shadows.medium.y
+        )
+    }
+    
+    func shadowLarge() -> some View {
+        self.shadow(
+            color: DesignSystem.Shadows.large.color,
+            radius: DesignSystem.Shadows.large.radius,
+            x: DesignSystem.Shadows.large.x,
+            y: DesignSystem.Shadows.large.y
+        )
+    }
+    
+    // Modificador para aplicar qualquer sombra do sistema
+    func applyShadow(_ style: (color: Color, radius: CGFloat, x: CGFloat, y: CGFloat)) -> some View {
+        self.shadow(color: style.color, radius: style.radius, x: style.x, y: style.y)
     }
 }

@@ -1,17 +1,33 @@
 import SwiftUI
 import Combine
 
+struct ImageCache {
+    private static var cache = NSCache<NSString, ImageContainer>()
+    
+    static func get(forKey key: String) -> Image? {
+        return cache.object(forKey: key as NSString)?.image
+    }
+    
+    static func set(_ image: Image, forKey key: String) {
+        cache.setObject(ImageContainer(image: image), forKey: key as NSString)
+    }
+    
+    private final class ImageContainer {
+        let image: Image
+        
+        init(image: Image) {
+            self.image = image
+        }
+    }
+}
+
 class ImageLoader: ObservableObject {
-    @Published var image: UIImage?
+    @Published var image: Image?
     private var url: URL?
     private var cancellable: AnyCancellable?
-    private var cache: ImageCache?
     
-    private static let imageProcessingQueue = DispatchQueue(label: "image-processing")
-    
-    init(url: URL?, cache: ImageCache? = nil) {
+    init(url: URL?) {
         self.url = url
-        self.cache = cache
     }
     
     deinit {
@@ -20,23 +36,33 @@ class ImageLoader: ObservableObject {
     
     func load() {
         guard let url = url else { return }
+        let cacheKey = url.absoluteString
         
-        if let image = cache?[url] {
-            self.image = image
+        // Verificar cache
+        if let cachedImage = ImageCache.get(forKey: cacheKey) {
+            self.image = cachedImage
             return
         }
         
         cancellable = URLSession.shared.dataTaskPublisher(for: url)
-            .subscribe(on: Self.imageProcessingQueue)
-            .map { UIImage(data: $0.data) }
+            .map { data, _ -> Image? in
+                #if os(macOS)
+                guard let nsImage = NSImage(data: data) else { return nil }
+                return Image(nsImage: nsImage)
+                #else
+                guard let uiImage = UIImage(data: data) else { return nil }
+                return Image(uiImage: uiImage)
+                #endif
+            }
             .replaceError(with: nil)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                guard let self = self else { return }
-                if let image = $0 {
-                    self.cache?[url] = image
-                }
-                self.image = $0
+            .sink { [weak self] loadedImage in
+                guard let self = self, let loadedImage = loadedImage else { return }
+                
+                // Atualizar cache
+                ImageCache.set(loadedImage, forKey: cacheKey)
+                
+                self.image = loadedImage
             }
     }
     
@@ -45,49 +71,24 @@ class ImageLoader: ObservableObject {
     }
 }
 
-protocol ImageCache {
-    subscript(_ url: URL) -> UIImage? { get set }
-}
-
-struct TemporaryImageCache: ImageCache {
-    private let cache = NSCache<NSURL, UIImage>()
-    
-    subscript(_ key: URL) -> UIImage? {
-        get { cache.object(forKey: key as NSURL) }
-        set { newValue == nil ? cache.removeObject(forKey: key as NSURL) : cache.setObject(newValue!, forKey: key as NSURL) }
-    }
-}
-
-struct ImageCacheKey: EnvironmentKey {
-    static let defaultValue: ImageCache = TemporaryImageCache()
-}
-
-extension EnvironmentValues {
-    var imageCache: ImageCache {
-        get { self[ImageCacheKey.self] }
-        set { self[ImageCacheKey.self] = newValue }
-    }
-}
-
 struct AsyncImage: View {
     @StateObject private var loader: ImageLoader
     private let placeholder: Image
-    private let content: (Image) -> Image
     
     init(
         url: URL?,
-        placeholder: Image = Image(systemName: "photo"),
-        content: @escaping (Image) -> Image = { $0.resizable() }
+        placeholder: Image = Image(systemName: "photo")
     ) {
-        _loader = StateObject(wrappedValue: ImageLoader(url: url, cache: nil))
+        _loader = StateObject(wrappedValue: ImageLoader(url: url))
         self.placeholder = placeholder
-        self.content = content
     }
     
     var body: some View {
         Group {
             if let image = loader.image {
-                content(Image(uiImage: image))
+                image
+                    .resizable()
+                    .scaledToFit()
             } else {
                 placeholder
                     .onAppear(perform: loader.load)

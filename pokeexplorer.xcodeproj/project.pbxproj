@@ -33,6 +33,8 @@
 		F8576DF62DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				model/Pokemon.swift,
+				model/PokemonDetails.swift,
 				model/Usuario.swift,
 			);
 			target = F8E559532DEB934F00CFF1AB /* pokeexplorerTests */;
@@ -40,6 +42,8 @@
 		F8576DF72DF47CB500DBF73B /* Exceptions for "pokeexplorer" folder in "pokeexplorerUITests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				model/Pokemon.swift,
+				model/PokemonDetails.swift,
 				model/Usuario.swift,
 			);
 			target = F8E5595D2DEB934F00CFF1AB /* pokeexplorerUITests */;
@@ -216,6 +220,9 @@
 			);
 			mainGroup = F8E559382DEB934D00CFF1AB;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F881608F2E051D7A00491E52 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F8E559422DEB934D00CFF1AB /* Products */;
 			projectDirPath = "";
@@ -604,6 +611,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F881608F2E051D7A00491E52 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = F8E559392DEB934D00CFF1AB /* Project object */;
 }

@@ -2,56 +2,96 @@ import SwiftUI
 
 struct PokemonListView: View {
     @StateObject var viewModel = PokemonListViewModel()
+    @EnvironmentObject var authManager: AuthManager
+    
+    private let gridColumns = [
+        GridItem(.flexible(), spacing: 16),
+        GridItem(.flexible(), spacing: 16)
+    ]
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], spacing: 16) {
-                    ForEach(viewModel.pokemons) { pokemon in
+            VStack {
+                searchField
+                pokemonGrid
+            }
+            .navigationTitle("Pokédex")
+            .toolbar { toolbarContent }
+            .overlay(alignment: .center) { loadingIndicator }
+            .alert("Error", isPresented: Binding<Bool>(
+                get: { viewModel.error != nil },
+                set: { _ in viewModel.error = nil }
+            )) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(viewModel.error ?? "Unknown error")
+            }
+        }
+    }
+    
+    // MARK: - Subviews
+    
+    private var searchField: some View {
+        TextField("Search Pokémon", text: $viewModel.searchText)
+            .padding(.horizontal)
+            .textFieldStyle(.roundedBorder)
+            .autocapitalization(.none)
+            .disableAutocorrection(true)
+            .padding(.horizontal)
+    }
+    
+    private var pokemonGrid: some View {
+        ScrollView {
+            LazyVGrid(columns: gridColumns, spacing: 16) {
+                ForEach(viewModel.filteredPokemons) { pokemon in
+                    NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
                         PokemonGridCell(pokemon: pokemon)
-                            .onAppear {
-                                if pokemon == viewModel.pokemons.last {
-                                    viewModel.fetchPokemons()
-                                }
-                            }
+                    }
+                    .buttonStyle(PlainButtonStyle()) // Remove o efeito de botão padrão
+                    .onAppear {
+                        if viewModel.filteredPokemons.last?.id == pokemon.id {
+                            viewModel.fetchPokemons()
+                        }
                     }
                 }
-                .padding()
             }
-            .navigationTitle("Pokémons")
-            .onAppear {
-                if viewModel.pokemons.isEmpty {
-                    viewModel.fetchPokemons()
-                }
+            .padding()
+        }
+        .refreshable {
+            viewModel.refresh()
+        }
+    }
+    
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            NavigationLink(destination: ProfileView()) {
+                Image(systemName: "person.circle")
             }
-            .overlay {
-                if viewModel.isLoading {
-                    ProgressView()
-                }
-                
-                if let error = viewModel.error {
-                    Text("Erro: \(error)")
-                        .foregroundColor(.red)
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(8)
-                }
+        }
+    }
+    
+    private var loadingIndicator: some View {
+        Group {
+            if viewModel.isLoading && viewModel.pokemons.isEmpty {
+                ProgressView()
+                    .scaleEffect(1.5)
             }
         }
     }
 }
 
+// MARK: - PokemonGridCell
 struct PokemonGridCell: View {
     let pokemon: Pokemon
     
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
             AsyncImage(url: pokemon.imageUrl) { phase in
                 switch phase {
                 case .success(let image):
                     image.resizable()
                         .scaledToFit()
-                        .frame(width: 100, height: 100)
+                        .transition(.opacity.combined(with: .scale))
                 case .failure:
                     Image(systemName: "questionmark.circle")
                         .font(.largeTitle)
@@ -59,9 +99,13 @@ struct PokemonGridCell: View {
                     ProgressView()
                 }
             }
+            .frame(width: 100, height: 100)
             
             Text(pokemon.name.capitalized)
                 .font(.headline)
+                .foregroundColor(.primary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
             
             if let id = pokemon.pokemonId {
                 Text("#\(String(format: "%03d", id))")
@@ -72,5 +116,7 @@ struct PokemonGridCell: View {
         .padding()
         .background(Color(.systemGray6))
         .cornerRadius(12)
+        .shadow(radius: 3)
+        .contentShape(Rectangle())
     }
 }

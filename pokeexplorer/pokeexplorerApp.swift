@@ -1,8 +1,9 @@
 import SwiftUI
+import SwiftData
 
 @main
-struct pokeexplorerApp: App {
-    @StateObject var authManager = AuthManager()
+struct PokeExplorerApp: App {
+    @StateObject private var authManager = AuthManager() // Sua classe de autenticação
     
     var body: some Scene {
         WindowGroup {

@@ -1,10 +1,25 @@
 import SwiftUI
+import SwiftData
+
+// MODIFICAÇÃO: Lógica da animação de clique, adicionada diretamente neste arquivo.
+struct BounceOnClickStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .animation(.spring(response: 0.4, dampingFraction: 0.6), value: configuration.isPressed)
+    }
+}
 
 struct PokemonListView: View {
-    @StateObject var viewModel = PokemonListViewModel()
+    @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var authManager: AuthManager
     
-    private let gridColumns = [
+    @StateObject var viewModel = PokemonListViewModel()
+    
+    // MODIFICAÇÃO: Namespace para conectar a animação entre as telas.
+    @Namespace private var animation
+    
+    private let gridColumns = [ // Renomeei para corresponder ao uso abaixo
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
     ]
@@ -44,10 +59,13 @@ struct PokemonListView: View {
         ScrollView {
             LazyVGrid(columns: gridColumns, spacing: 16) {
                 ForEach(viewModel.filteredPokemons) { pokemon in
-                    NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
-                        PokemonGridCell(pokemon: pokemon)
+                    // MODIFICAÇÃO: Passando o namespace para a DetailView.
+                    NavigationLink(destination: PokemonDetailView(pokemon: pokemon, modelContext: modelContext, authManager: authManager, namespace: animation)) {
+                        // MODIFICAÇÃO: Passando o namespace para a célula do grid.
+                        PokemonGridCell(pokemon: pokemon, namespace: animation)
                     }
-                    .buttonStyle(PlainButtonStyle()) // Remove o efeito de botão padrão
+                    // MODIFICAÇÃO: Trocando o PlainButtonStyle pelo nosso estilo de animação.
+                    .buttonStyle(BounceOnClickStyle())
                     .onAppear {
                         if viewModel.filteredPokemons.last?.id == pokemon.id {
                             viewModel.fetchPokemons()
@@ -83,6 +101,8 @@ struct PokemonListView: View {
 // MARK: - PokemonGridCell
 struct PokemonGridCell: View {
     let pokemon: Pokemon
+    // MODIFICAÇÃO: A célula agora aceita o namespace para identificar a imagem.
+    var namespace: Namespace.ID
     
     var body: some View {
         VStack(spacing: 8) {
@@ -91,6 +111,8 @@ struct PokemonGridCell: View {
                 case .success(let image):
                     image.resizable()
                         .scaledToFit()
+                        // MODIFICAÇÃO: Identifica a imagem para a animação.
+                        .matchedGeometryEffect(id: "sprite\(pokemon.id)", in: namespace)
                         .transition(.opacity.combined(with: .scale))
                 case .failure:
                     Image(systemName: "questionmark.circle")

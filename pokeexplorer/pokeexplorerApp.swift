@@ -3,7 +3,7 @@ import SwiftData
 
 @main
 struct PokeExplorerApp: App {
-    @StateObject private var authManager = AuthManager() // Sua classe de autenticação
+    @StateObject private var authManager = AuthManager()
     
     var body: some Scene {
         WindowGroup {
@@ -15,5 +15,6 @@ struct PokeExplorerApp: App {
                     .environmentObject(authManager)
             }
         }
+        .modelContainer(for: [FavoritePokemon.self]) 
     }
 }

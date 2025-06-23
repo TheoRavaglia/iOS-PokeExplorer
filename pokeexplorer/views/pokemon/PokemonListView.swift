@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftData
 
-// MODIFICAÇÃO: Lógica da animação de clique, adicionada diretamente neste arquivo.
+// ButtonStyle (sem alterações)
 struct BounceOnClickStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -14,15 +14,31 @@ struct PokemonListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var authManager: AuthManager
     
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
     @StateObject var viewModel = PokemonListViewModel()
     
-    // MODIFICAÇÃO: Namespace para conectar a animação entre as telas.
     @Namespace private var animation
     
-    private let gridColumns = [ // Renomeei para corresponder ao uso abaixo
-        GridItem(.flexible(), spacing: 16),
-        GridItem(.flexible(), spacing: 16)
-    ]
+    // --- INÍCIO DA MODIFICAÇÃO ---
+    // A propriedade `gridColumns` agora tem uma lógica para cada tipo de tela.
+    private var gridColumns: [GridItem] {
+        if horizontalSizeClass == .compact {
+            // Para telas compactas (iPhones), usamos 2 colunas flexíveis.
+            // Isso garante que sempre haverá exatamente duas colunas.
+            return [
+                GridItem(.flexible(), spacing: 16),
+                GridItem(.flexible(), spacing: 16)
+            ]
+        } else {
+            // Para telas regulares (iPads), usamos a grade adaptativa.
+            // Ela cria quantas colunas couberem, com um tamanho mínimo de 160.
+            return [
+                GridItem(.adaptive(minimum: 160), spacing: 16)
+            ]
+        }
+    }
+    // --- FIM DA MODIFICAÇÃO ---
     
     var body: some View {
         NavigationStack {
@@ -44,7 +60,7 @@ struct PokemonListView: View {
         }
     }
     
-    // MARK: - Subviews
+    // MARK: - Subviews (sem alterações)
     
     private var searchField: some View {
         TextField("Search Pokémon", text: $viewModel.searchText)
@@ -59,12 +75,9 @@ struct PokemonListView: View {
         ScrollView {
             LazyVGrid(columns: gridColumns, spacing: 16) {
                 ForEach(viewModel.filteredPokemons) { pokemon in
-                    // MODIFICAÇÃO: Passando o namespace para a DetailView.
                     NavigationLink(destination: PokemonDetailView(pokemon: pokemon, modelContext: modelContext, authManager: authManager, namespace: animation)) {
-                        // MODIFICAÇÃO: Passando o namespace para a célula do grid.
                         PokemonGridCell(pokemon: pokemon, namespace: animation)
                     }
-                    // MODIFICAÇÃO: Trocando o PlainButtonStyle pelo nosso estilo de animação.
                     .buttonStyle(BounceOnClickStyle())
                     .onAppear {
                         if viewModel.filteredPokemons.last?.id == pokemon.id {
@@ -98,10 +111,9 @@ struct PokemonListView: View {
     }
 }
 
-// MARK: - PokemonGridCell
+// MARK: - PokemonGridCell (sem alterações)
 struct PokemonGridCell: View {
     let pokemon: Pokemon
-    // MODIFICAÇÃO: A célula agora aceita o namespace para identificar a imagem.
     var namespace: Namespace.ID
     
     var body: some View {
@@ -111,12 +123,10 @@ struct PokemonGridCell: View {
                 case .success(let image):
                     image.resizable()
                         .scaledToFit()
-                        // MODIFICAÇÃO: Identifica a imagem para a animação.
                         .matchedGeometryEffect(id: "sprite\(pokemon.id)", in: namespace)
                         .transition(.opacity.combined(with: .scale))
                 case .failure:
-                    Image(systemName: "questionmark.circle")
-                        .font(.largeTitle)
+                    Image(systemName: "questionmark.circle").font(.largeTitle)
                 default:
                     ProgressView()
                 }

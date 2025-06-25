@@ -1,5 +1,10 @@
 # iOS-PokeExplorer
 
+Integrantes:
+Italo de Andrade
+Otavio Murilo Ribas
+Theo Ravaglia
+
 iOS-PokeExplorer é um aplicativo para iOS que funciona como uma Pokédex moderna, permitindo aos usuários explorar o mundo dos Pokémon. O projeto foi desenvolvido inteiramente com tecnologias nativas da Apple, demonstrando uma aplicação robusta e autocontida.
 
 O foco do projeto é exibir a construção de uma aplicação utilizando SwiftUI para a interface, uma arquitetura bem definida (MVVM) para a lógica, e SwiftData/Core Data para toda a persistência de dados, incluindo o sistema de autenticação de usuários.
